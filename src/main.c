@@ -9,7 +9,6 @@
 #include <sys/wait.h>
 
 
-
 /*************
 * Struct to hold Processes
 * Includes: pid,pname,jobnum, status
@@ -31,6 +30,7 @@ process *head = NULL;
 process *curr = NULL;
 
 // Variable to detect when a process finishes
+//Reference: http://www.makelinux.net/alp/026
 sig_atomic_t child_exit_status;
 
 /*************
@@ -198,6 +198,8 @@ int removeProcess(pid_t pid){
 * Accepts: signal
 * Action: Handler, removes process from list when process completes
 *************/
+
+//Reference: http://www.makelinux.net/alp/026
 void clean_up_child_process (int signal_number){
 	pid_t pid;
 	while((pid = waitpid((pid_t)(-1), NULL, WNOHANG)) > 0){
